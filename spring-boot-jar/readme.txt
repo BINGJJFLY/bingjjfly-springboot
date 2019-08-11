@@ -87,11 +87,36 @@
         application.yml/application.yaml
     YAML标记语言：以数据为中心，比Json、XML更适合做配置文件
         server:
-          port:8082
+            port: 8082
     XML形式：
         <server>
             <port>8082</port>
         </server>
 
-
-
+    YAML
+        基本语法
+            * k: v  表示一个键值对(空格必须有)以空格缩进表示层级关系（不允许使用tab键），相同层级元素左对齐
+                server:
+                    port: 8082
+                    path: /hello
+            * 属性值大小写敏感
+        三种数据结构
+            字面量（字符串、数字、布尔）
+                形式如 k: v，可以直接写
+                双引号 k: "v"，特殊字符转义，如 "\n" 会换行
+                单引号 k: 'v'， 特殊字符不转义，如 '\n' 不会换行
+            对象、Map（属性和值、键值对）
+                一般写法：
+                    user:
+                        name: iss002
+                        age: 18
+                行内写法：
+                    user: { name: iss002, age: 18 }
+            数组（List、Set）
+                一般写法：
+                    pets:
+                      - cat: { name: cat }
+                      - dog: { name: dog }
+                      - pig: { name: pig }
+                行内写法：
+                    pets: [ cat: { name: cat }, dog: { name: dog }, pig: { name: pig } ]
