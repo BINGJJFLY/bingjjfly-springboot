@@ -120,3 +120,119 @@
                       - pig: { name: pig }
                 行内写法：
                     pets: [ cat: { name: cat }, dog: { name: dog }, pig: { name: pig } ]
+
+8、配置文件映射为Bean
+   YAML方式：
+        person:
+          last-name: iss002
+          age: 18
+          man: true
+          birthday: 2019/08/11
+          dog:
+            name: dog
+            age: 7
+          kvs: { id: 1, name: wjz }
+          items:
+            - spring
+            - boot
+   Properties方式：
+        person.last-name=金饼
+        person.age=18
+        person.man=false
+        person.birthday=2019/08/11
+        person.dog.name=dog
+        person.dog.age=7
+        person.kvs.id=1
+        person.kvs.name=wjz
+        person.items=spring, boot
+
+9、@ConfigurationProperties和@Value的区别
+    功能                  批量映射                    逐一映射
+    松散绑定                支持                       不支持
+    SpEL                   不支持                      支持
+    JSP303数据校验          支持                       不支持
+    复杂类型                支持                       不支持
+
+    * 松散绑定即last-name=lastName
+    * JSP303数据校验即@Email等
+    * 复杂类型即对象、Map、数组
+
+11、@PropertySource&@ImportResource
+    @PropertySource：指定配置Properties文件进行映射，无法加载YAML文件
+    @ImportResource：加载指定配置文件，配置在主程序上，配合XML文件使用
+        SpringBoot更推荐使用注解方式进行配置
+
+12、配置文件占位符
+    * 随机数：${random.value}、${random.int}、${random.long}、${random.int(10)}、${random.int[1,100]}
+    * 占位符：可获取之前的配置信息，可以设置默认值
+
+    person.last-name=金饼
+    person.age=${random.int}
+    person.man=false
+    person.birthday=2019/08/11
+    person.dog.name=dog
+    person.dog.age=7
+    person.kvs.id=${random.uuid}
+    person.kvs.name=wjz
+    person.items=spring, boot, ${person.last-name}, ${hello:world}
+
+13、Profile适配不同环境的配置信息
+    多Profile文件
+        主配置文件名可以使application-${profile}.properties/yml，默认使用application.properties的配置
+
+    YAML支持多文档块（'---'分隔文档块）
+        spring:
+            profiles:
+                active: dev
+
+        ---
+        server:
+            port: 8080
+        spring:
+            profiles: dev
+
+        ---
+        server:
+            port: 8081
+        spring:
+            profiles: prod
+
+    激活指定profile
+        * 配置文件指定
+            application.properties配置文件中写
+                spring.profiles.active=dev
+            application.yml配置文件中写
+                spring:
+                    profiles:
+                        active: dev
+        * 命令行启动
+            打好包之后运行命令
+                java -jar spring-boot-jar-1.0.jar --spring.profiles.active=dev
+            测试时可以传入命令行参数
+                Edit Configurations -> program Args -> --spring.profiles.active=dev
+        * 虚拟机参数
+            Edit Configurations -> VM options -> -Dspring.profiles.active=dev
+
+14、配置文件的加载顺序
+    context-path/config/    ：项目路径下的config目录下
+    context-path/   ： 项目路径下
+    classpath/config/   ： 类路径下的config目录下
+    classpath/  ： 类路径下
+
+    优先级由高到低，高优先级相同配置会覆盖低优先级配置
+    SpringBoot会全部加载四个位置的主配置文件；互补配置
+
+    加载指定的配置文件（优先级最高，仍互补配置）
+    命令行方式启动项目：java -jar spring-boot-jar-1.0.jar --spring.config.location=D:/application.properties
+
+15、外部化配置
+    参考官方文档：https://docs.spring.io/spring-boot/docs/2.1.7.RELEASE/reference/html/boot-features-external-config.html
+
+
+
+
+
+
+
+
+

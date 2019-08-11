@@ -1,2 +1,31 @@
+#server:
+#    port: 8080
+spring:
+    profiles:
+        active: dev
+
+---
 server:
-    port: 8082
+    port: 8080
+spring:
+    profiles: dev
+
+---
+server:
+    port: 8081
+spring:
+    profiles: prod
+
+
+#person:
+#  last-name: iss002
+#  age: 18
+#  man: true
+#  birthday: 2019/08/11
+#  dog:
+#    name: dog
+#    age: 7
+#  kvs: { id: 1, name: wjz }
+#  items:
+#    - spring
+#    - boot
