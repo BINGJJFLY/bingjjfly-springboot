@@ -74,9 +74,24 @@
                 return resolver;
             }
 
+6、Spring Initializer快速创建项目
+    * 主程序已经创建好
+    * resources目录结构已经创建好
+        static
+        templates（SpringBoot使用嵌入式的Tomcat，默认不支持JSP，可以使用Freemarker、Thymeleaf）
+        application.properties（SpringBoot配置文件，可以修改默认配置如Tomcat端口号）
 
-
-
+7、配置文件
+    SpringBoot支持的全局配置文件（文件名是固定的）
+        application.properties
+        application.yml/application.yaml
+    YAML标记语言：以数据为中心，比Json、XML更适合做配置文件
+        server:
+          port:8082
+    XML形式：
+        <server>
+            <port>8082</port>
+        </server>
 
 
 
