@@ -158,7 +158,7 @@
     * 复杂类型即对象、Map、数组
 
 11、@PropertySource&@ImportResource
-    @PropertySource：指定配置Properties文件进行映射，无法加载YAML文件
+    @PropertySource：指定配置Properties文件进行映射，无法加载YAML文件，@ConfigurationProperties默认映射全局配置文件
     @ImportResource：加载指定配置文件，配置在主程序上，配合XML文件使用
         SpringBoot更推荐使用注解方式进行配置
 
@@ -228,10 +228,20 @@
 15、外部化配置
     参考官方文档：https://docs.spring.io/spring-boot/docs/2.1.7.RELEASE/reference/html/boot-features-external-config.html
 
+16、主配置文件能写哪些配置？
+    参考官方文档：https://docs.spring.io/spring-boot/docs/2.1.7.RELEASE/reference/html/common-application-properties.html
 
-
-
-
+17、SpringBoot配置原理
+    1) SpringBoot启动时加载主配置类，开启自动配置功能，@SpringBootApplication --> @EnableAutoConfiguration
+    2) @EnableAutoConfiguration作用：
+        利用AutoConfigurationImportSelector导入自动配置组件，@Import({AutoConfigurationImportSelector.class})
+        将类路径下 META-INF/spring.factories 配置文件里org.springframework.boot.autoconfigure对应的值加载到容器中
+            org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+            org.springframework.boot.autoconfigure.admin.SpringApplicationAdminJmxAutoConfiguration,\
+            org.springframework.boot.autoconfigure.aop.AopAutoConfiguration,\
+            org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration,\
+            org.springframework.boot.autoconfigure.batch.BatchAutoConfiguration,\
+            org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration,\
 
 
 

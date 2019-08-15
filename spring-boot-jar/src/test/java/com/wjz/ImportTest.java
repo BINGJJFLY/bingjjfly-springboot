@@ -1,5 +1,6 @@
 package com.wjz;
 
+import com.wjz.config.EmailAutoConfiguration;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,19 @@ public class ImportTest {
 
     @Test
     public void importBean() {
-       boolean contains = context.containsBean("helloService");
+        boolean contains = context.containsBean("helloService");
         System.out.println(contains);
+    }
+
+    @Autowired
+    EmailAutoConfiguration.EmailSender emailSender;
+
+    @Test
+    public void emailSender() {
+        System.out.println(emailSender.power());
+        System.out.println(emailSender.type());
+        System.out.println(emailSender.qqName());
+        System.out.println(emailSender.dreams());
+        System.out.println(emailSender.time());
     }
 }

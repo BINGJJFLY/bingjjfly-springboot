@@ -1,5 +1,6 @@
 package com.wjz;
 
+import com.wjz.domain.EmailSenderEnv;
 import com.wjz.domain.Person;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,9 +19,16 @@ public class YamlTest {
 
     @Autowired
     Person person;
+    @Autowired
+    EmailSenderEnv env;
 
     @Test
     public void yaml() {
         System.out.println(person);
+    }
+
+    @Test
+    public void resourcePro() {
+        System.out.println(env.host());
     }
 }
