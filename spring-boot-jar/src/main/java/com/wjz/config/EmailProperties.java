@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * 主配置文件映射Bean，属性类型测试
+ */
 @ConfigurationProperties(
         prefix = "boot.email"
 )

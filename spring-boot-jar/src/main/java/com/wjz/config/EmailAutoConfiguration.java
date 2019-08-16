@@ -10,6 +10,9 @@ import org.springframework.context.annotation.Import;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * 自动配置原理研究
+ */
 @Configuration
 @EnableConfigurationProperties({EmailProperties.class})
 @Import(EmailSenderConfiguration.class)
@@ -54,7 +57,12 @@ public class EmailAutoConfiguration {
     static class EmailMessageConfiguration {
         @Bean
         public EmailMessage ems() {
-            return new EmailMessage();
+            return new EmailMessage("hello");
+        }
+
+        @Bean
+        public EmailMessage alibb() {
+            return new EmailMessage("world");
         }
     }
 }

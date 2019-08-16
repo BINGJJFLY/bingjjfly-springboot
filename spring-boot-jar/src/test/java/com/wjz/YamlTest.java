@@ -1,10 +1,10 @@
 package com.wjz;
 
+import com.wjz.config.EmailProperties;
 import com.wjz.domain.EmailSenderEnv;
 import com.wjz.domain.Person;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -21,6 +21,8 @@ public class YamlTest {
     Person person;
     @Autowired
     EmailSenderEnv env;
+    @Autowired
+    EmailProperties email;
 
     @Test
     public void yaml() {
@@ -30,5 +32,10 @@ public class YamlTest {
     @Test
     public void resourcePro() {
         System.out.println(env.host());
+    }
+
+    @Test
+    public void email() {
+        System.out.println(email.getPower());
     }
 }

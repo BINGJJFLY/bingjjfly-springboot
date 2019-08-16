@@ -231,7 +231,7 @@
 16、主配置文件能写哪些配置？
     参考官方文档：https://docs.spring.io/spring-boot/docs/2.1.7.RELEASE/reference/html/common-application-properties.html
 
-17、SpringBoot配置原理
+17、SpringBoot自动配置原理
     1) SpringBoot启动时加载主配置类，开启自动配置功能，@SpringBootApplication --> @EnableAutoConfiguration
     2) @EnableAutoConfiguration作用：
         利用AutoConfigurationImportSelector导入自动配置组件，@Import({AutoConfigurationImportSelector.class})
@@ -242,7 +242,33 @@
             org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration,\
             org.springframework.boot.autoconfigure.batch.BatchAutoConfiguration,\
             org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration,\
+        每一个xxxAutoConfiguration类都是容器中的一个组件，都加入到容器中，用他们来做自动配置
+        每一个xxxProperties类都是容器中的一个组件，用来映射主配置文件内容
 
+        Spring底层注解@Conditional，如果满足指定条件则当前@Configuration修饰的类的配置生效
+        @ConditionalOnWebApplication：判断当前项目是为Web应用
+            @Conditional({OnWebApplicationCondition.class})
+        @ConditionalOnClass({CharacterEncodingFilter.class})：判断当前项目是否可以加载到指定类
+            @Conditional({OnClassCondition.class})
+        @ConditionalOnProperty(
+            prefix = "spring.http.encoding",
+            value = {"enabled"},
+            matchIfMissing = true
+        )：判断主配置文件是否有 spring.http.encoding.enabled 的配置项，matchIfMissing为true时，配置文件中缺少对应的value或name的对应的属性值，也会判断成功
 
-
-
+        HTTPProperties注入的三种方式：
+            1) 每个方法入参注入
+                @Bean
+                public EncodingFilter filter(HTTPProperties httpProperties)
+            2) @Autowired修饰成员变量注入
+                @Autowired
+                private HTTPProperties httpProperties;
+                @Bean
+                public EncodingFilter filter()
+            3) 唯一有参构造器注入
+                private final HTTPProperties httpProperties;
+                public HTTPAutoConfiguration(HTTPProperties httpProperties) {
+                    this.httpProperties = httpProperties;
+                }
+                @Bean
+                public EncodingFilter filter()

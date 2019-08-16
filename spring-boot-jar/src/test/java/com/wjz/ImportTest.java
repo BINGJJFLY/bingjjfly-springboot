@@ -3,6 +3,7 @@ package com.wjz;
 import com.wjz.config.EmailAutoConfiguration;
 import com.wjz.config.EmailMessage;
 import com.wjz.config.EmailSender;
+import com.wjz.config.EncodingFilter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,9 @@ public class ImportTest {
     @Autowired
     EmailSender sender;
 
+    /**
+     * @Import注解导入@Configuration修饰的类，该类下@Bean均加入容器中
+     */
     @Test
     public void send() {
         sender.send("@Import('')");
@@ -46,8 +50,35 @@ public class ImportTest {
     @Autowired
     EmailMessage ems;
 
+    /**
+     * 内部类修饰@Configuration
+     */
+    @Test
+    public void innerConfiguration() {
+        ems.email("inner Configuration");
+    }
+
     @Test
     public void ems() {
-        ems.email("inner configuration");
+        ems.msg();
+    }
+
+    /**
+     * 相同类方法名不同ems、alibb注入了两个对象，变量名和@Bean方法名（即BeanId）相同则注入对应组件
+     */
+    @Autowired
+    EmailMessage alibb;
+
+    @Test
+    public void alibb() {
+        alibb.msg();
+    }
+
+    @Autowired
+    EncodingFilter filter;
+
+    @Test
+    public void filter() {
+        System.out.println(filter.getEncoding());
     }
 }
