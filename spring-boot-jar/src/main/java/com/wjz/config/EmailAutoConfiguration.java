@@ -5,12 +5,14 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 import java.util.Date;
 import java.util.List;
 
 @Configuration
 @EnableConfigurationProperties({EmailProperties.class})
+@Import(EmailSenderConfiguration.class)
 public class EmailAutoConfiguration {
 
     @Bean
@@ -46,5 +48,13 @@ public class EmailAutoConfiguration {
             return emailProperties.getTime();
         }
 
+    }
+
+    @Configuration
+    static class EmailMessageConfiguration {
+        @Bean
+        public EmailMessage ems() {
+            return new EmailMessage();
+        }
     }
 }

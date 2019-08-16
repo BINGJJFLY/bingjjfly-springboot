@@ -1,6 +1,8 @@
 package com.wjz;
 
 import com.wjz.config.EmailAutoConfiguration;
+import com.wjz.config.EmailMessage;
+import com.wjz.config.EmailSender;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +33,21 @@ public class ImportTest {
         System.out.println(emailSender.qqName());
         System.out.println(emailSender.dreams());
         System.out.println(emailSender.time());
+    }
+
+    @Autowired
+    EmailSender sender;
+
+    @Test
+    public void send() {
+        sender.send("@Import('')");
+    }
+
+    @Autowired
+    EmailMessage ems;
+
+    @Test
+    public void ems() {
+        ems.email("inner configuration");
     }
 }
