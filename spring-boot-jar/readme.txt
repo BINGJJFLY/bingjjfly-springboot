@@ -272,3 +272,49 @@
                 }
                 @Bean
                 public EncodingFilter filter()
+18、各式ConditionalOn*？
+    org.springframework.boot.autoconfigure.condition.ConditionalOn*
+
+19、日志框架？
+    Slf4j日志抽象层、Logback日志实现层；Spring底层使用 JCL，SpringBoot使用 Slf4j
+    Slf4j官网：https://www.slf4j.org/manual.html
+    每一个日志的实现框架都有自己的配置文件，什么实现框架写什么配置文件
+
+20、如何让系统中所有的框架都统一使用Slf4j？
+    Slf4j官网：https://www.slf4j.org/legacy.html
+    1) 依赖排除
+        <dependency>
+            <groupId></groupId>
+            <artifactId></artifactId>
+            <version></version>
+            <exclusions>
+                <exclusion>
+                    <groupId></groupId>
+                    <artifactId></artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    2) 中间包替换（jcl-over.slf4j.jar等）
+    3) 导入Slf4j的实现包（logback）
+
+21、SpringBoot日志默认配置？
+    # 指定包的日志Level
+    logging.level.com.wjz=trace
+    # logging.file和logging.path都不指定只输出到控制台
+    # logging.file=spring_boot.log：当前项目下
+    # logging.file=D:/spring_boot.log：指定目录
+    # logging.file=D:/spring_boot.log
+
+    # 当前磁盘跟路径下创建/spring/log目录和spring.log文件，一般配置path而不配置file
+    logging.path=/spring/log
+
+    # 控制台格式
+    logging.pattern.console=%d{yyyy-MM-dd} {%thread} %-5level %logger{50} - %msg%n
+    # 文件格式
+    logging.pattern.file=%d{yyyy-MM-dd} === {%thread} === %-5level === %logger{50} === %msg%n
+
+    一些默认配置文件：org/springframework/boot/logging/logback/base.xml等
+
+22、自定义配置文件替掉默认配置文件？
+    SpringBoot官网：https://docs.spring.io/spring-boot/docs/2.1.7.RELEASE/reference/html/boot-features-logging.html
+    logback.xml配置文件直接被日志框架加载，logback-spring.xml配置文件会经Springboot处理
