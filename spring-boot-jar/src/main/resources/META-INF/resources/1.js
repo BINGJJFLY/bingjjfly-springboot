@@ -1,0 +1,1 @@
+var v = "hello /META-INF/resources/1.js";
