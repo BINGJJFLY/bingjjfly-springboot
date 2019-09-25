@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -81,4 +82,14 @@ public class ImportTest {
     public void filter() {
         System.out.println(filter.getEncoding());
     }
+
+    @Autowired
+    private InternalResourceViewResolver wphm;
+
+    @Test
+    public void exclude() {
+        wphm.setPrefix("pre_");
+    }
+
+
 }
