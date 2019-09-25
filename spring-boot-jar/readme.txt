@@ -272,3 +272,154 @@
                 }
                 @Bean
                 public EncodingFilter filter()
+18、各式ConditionalOn*？
+    org.springframework.boot.autoconfigure.condition.ConditionalOn*
+
+19、日志框架？
+    Slf4j日志抽象层、Logback日志实现层；Spring底层使用 JCL，SpringBoot使用 Slf4j
+    Slf4j官网：https://www.slf4j.org/manual.html
+    每一个日志的实现框架都有自己的配置文件，什么实现框架写什么配置文件
+
+20、如何让系统中所有的框架都统一使用Slf4j？
+    Slf4j官网：https://www.slf4j.org/legacy.html
+    1) 依赖排除
+        <dependency>
+            <groupId></groupId>
+            <artifactId></artifactId>
+            <version></version>
+            <exclusions>
+                <exclusion>
+                    <groupId></groupId>
+                    <artifactId></artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    2) 中间包替换（jcl-over.slf4j.jar等）
+    3) 导入Slf4j的实现包（logback）
+
+21、SpringBoot日志默认配置？
+    # 指定包的日志Level
+    logging.level.com.wjz=trace
+    # logging.file和logging.path都不指定只输出到控制台
+    # logging.file=spring_boot.log：当前项目下
+    # logging.file=D:/spring_boot.log：指定目录
+    # logging.file=D:/spring_boot.log
+
+    # 当前磁盘跟路径下创建/spring/log目录和spring.log文件，一般配置path而不配置file
+    logging.path=/spring/log
+
+    # 控制台格式
+    logging.pattern.console=%d{yyyy-MM-dd} {%thread} %-5level %logger{50} - %msg%n
+    # 文件格式
+    logging.pattern.file=%d{yyyy-MM-dd} === {%thread} === %-5level === %logger{50} === %msg%n
+
+    一些默认配置文件：org/springframework/boot/logging/logback/base.xml等
+
+22、自定义配置文件替掉默认配置文件？
+    SpringBoot官网：https://docs.spring.io/spring-boot/docs/2.1.7.RELEASE/reference/html/boot-features-logging.html
+    logback.xml配置文件直接被日志框架加载，logback-spring.xml配置文件会经Springboot处理
+
+23、静态资源映射？
+    项目是jar类型，静态资源进行映射
+    1) 所有 /webjars/** 请求，都去 classpath:/META-INF/resources/webjars/ 找资源 （WebMvcAutoConfiguration.addResourceHandlers）
+        webjars：以jar包的形式引入静态资源（https://www.webjars.org）
+        引入maven依赖
+        访问地址：http://127.0.0.1:8080/webjars/jquery/3.4.1/jquery.js
+        资源配置信息（ResourceProperties spring.resources.* [缓存时间]）
+    2) /** 任何访问
+        "classpath:/META-INF/resources/",
+        "classpath:/resources/",
+        "classpath:/static/",
+        "classpath:/public/",
+        （想改上述静态资源的路径可以修改配置 spring.resources.static-locations=classpath:xxx,yyy,zzz）
+        "/" （当前项目根路径）
+        WebMvcAutoConfiguration.getResourceLocations
+        访问地址：http://127.0.0.1:8080/1.js
+    3) 欢迎页
+        WebMvcAutoConfiguration.welcomePageHandlerMapping
+        静态资源文件夹下的 index.html 文件（按数组元素顺序查找），被 /** 映射
+        访问地址：http://127.0.0.1:8080 / http://127.0.0.1:8080/index.html
+    4) 小图标
+        静态资源文件夹下的 **/favicon.ico 文件
+        WebMvcAutoConfiguration.FaviconConfiguration.faviconHandlerMapping
+
+24、Thymeleaf表达式?
+    参考Thymeleaf官方文档：https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html
+
+	Simple expressions: 表达式
+		Variable Expressions: ${...}	获取变量值，底层OGNL表达式
+				1) 获取属性值（"user.name"）、调用方法（"user.getName()"、"user.getName('firstname')"）
+				2) 使用内置的基本对象
+					#ctx : the context object.
+					#vars: the context variables.
+					#locale : the context locale. ${#locale.country} 获得当前国家
+					#request : (only in Web Contexts) the HttpServletRequest object.
+					#response : (only in Web Contexts) the HttpServletResponse object.
+					#session : (only in Web Contexts) the HttpSession object.
+					#servletContext : (only in Web Contexts) the ServletContext object.
+				3) 使用内置的工具对象
+					#execInfo : information about the template being processed.
+					#messages : methods for obtaining externalized messages inside variables expressions, in the same way as they would be obtained using #{…} syntax.
+					#uris : methods for escaping parts of URLs/URIs Page 20 of 106#conversions : methods for executing the configured conversion service (if any).
+					#dates : methods for java.util.Date objects: formatting, component extraction, etc.
+					#calendars : analogous to #dates , but for java.util.Calendar objects.
+					#numbers : methods for formatting numeric objects.
+					#strings : methods for String objects: contains, startsWith, prepending/appending, etc.
+					#objects : methods for objects in general.
+					#bools : methods for boolean evaluation.
+					#arrays : methods for arrays.
+					#lists : methods for lists.
+					#sets : methods for sets.
+					#maps : methods for maps.
+					#aggregates : methods for creating aggregates on arrays or collections.
+					#ids : methods for dealing with id attributes that might be repeated (for example, as a result of an iteration)
+
+		Selection Variable Expressions: *{...}		和${}功能是一样的，补充功能配合 th:object 使用
+			<div th:object="${session.user}">
+				<p>Name: <span th:text="*{firstName}">Sebastian</span>.</p>
+				<p>Surname: <span th:text="*{lastName}">Pepper</span>.</p>
+				<p>Nationality: <span th:text="*{nationality}">Saturn</span>.</p>
+			</div>
+			不用写成这样：
+			<div>
+				<p>Name: <span th:text="${session.user.firstName}">Sebastian</span>.</p>
+				<p>Surname: <span th:text="${session.user.lastName}">Pepper</span>.</p>
+				<p>Nationality: <span th:text="${session.user.nationality}">Saturn</span>.</p>
+			</div>
+
+		Message Expressions: #{...}			国际化
+
+		Link URL Expressions: @{...}		定义URL连接
+			@{/order/process(execId=${execId},execType='FAST')}	小括号代替问号，多参数用逗号分隔
+
+		Fragment Expressions: ~{...}		片段引用表达式
+
+	Literals: 字面量
+		Text literals: 'one text' , 'Another one!' ,…
+		Number literals: 0 , 34 , 3.0 , 12.3 ,…
+		Boolean literals: true , false
+		Null literal: null
+		Literal tokens: one , sometext , main ,…  多个数据逗号隔开
+
+	Text operations: 文本操作
+		String concatenation: +		字符串连接
+		Literal substitutions: |The name is ${name}|		字符串替换
+
+	Arithmetic operations: 数学运算
+		Binary operators: + , - , * , / , %
+		Minus sign (unary operator): -
+
+	Boolean operations: 布尔
+		Binary operators: and , or
+		Boolean negation (unary operator): ! , not
+
+	Comparisons and equality: 比较
+		Comparators: > , < , >= , <= ( gt , lt , ge , le )
+		Equality operators: == , != ( eq , ne )
+
+	Conditional operators: 条件
+		If-then: (if) ? (then)
+		If-then-else: (if) ? (then) : (else)
+		Default: (value) ?: (defaultvalue)
+	Special tokens: 特殊符号
+		Page 17 of 106No-Operation: _		无操作

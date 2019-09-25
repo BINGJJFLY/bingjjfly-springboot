@@ -5,10 +5,12 @@ import com.wjz.config.validator.SampleProperties;
 import com.wjz.profiles.ProfileCompoent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 public class HelloController {
 
     @Value("${server.port}")
@@ -23,6 +25,7 @@ public class HelloController {
     private ProfileCompoent profileCompoent;
 
     @RequestMapping("/")
+    @ResponseBody
     public String hello() {
         StringBuilder html = new StringBuilder();
         html.append("hello SpringBoot!\n")
@@ -35,5 +38,10 @@ public class HelloController {
         ;
 
         return html.toString();
+    }
+
+    @RequestMapping("/success")
+    public String success() {
+        return "success";
     }
 }

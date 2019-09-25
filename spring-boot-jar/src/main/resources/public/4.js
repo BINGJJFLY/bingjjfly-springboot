@@ -1,0 +1,1 @@
+var v = "hello /public/4.js";
