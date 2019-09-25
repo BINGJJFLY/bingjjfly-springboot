@@ -35,9 +35,6 @@ public class SpringBootJarApplication {
                 .profiles("prev")
                 .run(args);
 
-        SpringApplication application = new SpringApplication(SpringBootJarApplication.class);
-        application.setAdditionalProfiles("prev");
-        application.run(args);
 //        System.exit(SpringApplication.exit(SpringApplication.run(SpringBootJarApplication.class, args)));
     }
 
