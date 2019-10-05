@@ -1,7 +1,7 @@
 package com.wjz;
 
 import com.wjz.event.ApplicationStartingEventListener;
-import de.codecentric.boot.admin.server.config.EnableAdminServer;
+//import de.codecentric.boot.admin.server.config.EnableAdminServer;
 import org.springframework.boot.Banner;
 import org.springframework.boot.ExitCodeGenerator;
 import org.springframework.boot.SpringApplication;
@@ -18,7 +18,7 @@ import java.io.PrintStream;
  * 类位置在必须com.wjz下，否则Bean扫描异常
  */
 //@ImportResource({"classpathApplicationEventPublisher:spring-beans.xml"})
-@EnableAdminServer
+//@EnableAdminServer
 @SpringBootApplication
 public class SpringBootJarApplication {
     public static void main(String[] args) {

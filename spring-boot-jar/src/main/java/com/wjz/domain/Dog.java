@@ -1,9 +1,12 @@
 package com.wjz.domain;
 
+import java.util.Date;
+
 public class Dog {
 
     private String name;
     private Integer age;
+    private Date birth;
 
     public String getName() {
         return name;
@@ -19,6 +22,14 @@ public class Dog {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public Date getBirth() {
+        return birth;
+    }
+
+    public void setBirth(Date birth) {
+        this.birth = birth;
     }
 
     @Override
