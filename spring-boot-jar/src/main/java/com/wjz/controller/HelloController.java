@@ -44,4 +44,9 @@ public class HelloController {
     public String success() {
         return "success";
     }
+
+    @RequestMapping("/i18n")
+    public String i18n() {
+        return "i18n";
+    }
 }

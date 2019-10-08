@@ -1,0 +1,1 @@
+var v = "hello /META-INF/resources/webjars/js/1.0.0/1.js";
