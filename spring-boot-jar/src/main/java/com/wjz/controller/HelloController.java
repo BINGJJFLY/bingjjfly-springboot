@@ -24,7 +24,7 @@ public class HelloController {
     @Autowired
     private ProfileCompoent profileCompoent;
 
-    @RequestMapping("/")
+    @RequestMapping("/springboot")
     @ResponseBody
     public String hello() {
         StringBuilder html = new StringBuilder();
