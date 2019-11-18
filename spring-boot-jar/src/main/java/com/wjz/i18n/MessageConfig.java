@@ -18,6 +18,7 @@ public class MessageConfig {
 
     /**
      * 很多实现类，可以从session、cookie、Accept-Language header、或者一个固定的值来判断当前的语言环境
+     *
      * @return
      */
     @Bean

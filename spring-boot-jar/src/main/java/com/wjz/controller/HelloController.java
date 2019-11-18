@@ -32,9 +32,9 @@ public class HelloController {
                 .append("password：").append(password)
                 .append("email:").append(emailProperties.getPower())
                 .append("LastName:").append(emailProperties.getQq().getLastName())
-        .append("SessionTimeout:").append(emailProperties.getSessionTimeout().getSeconds())
-        .append("BufferSize").append(emailProperties.getBufferSize().toMegabytes())
-        .append("Validator-Host:").append(validatorProperties.getHost())
+                .append("SessionTimeout:").append(emailProperties.getSessionTimeout().getSeconds())
+                .append("BufferSize").append(emailProperties.getBufferSize().toMegabytes())
+                .append("Validator-Host:").append(validatorProperties.getHost())
         ;
 
         return html.toString();

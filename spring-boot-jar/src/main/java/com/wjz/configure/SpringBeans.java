@@ -9,7 +9,8 @@ public class SpringBeans {
 
     /**
      * 注解形式代替XML形式
-     *      返回值为Bean实例，方法名为Bean的Id
+     * 返回值为Bean实例，方法名为Bean的Id
+     *
      * @return
      */
     @Bean

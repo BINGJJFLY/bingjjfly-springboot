@@ -2,6 +2,7 @@ package com.wjz.config;
 
 public class EmailMessage {
     private String msg;
+
     public EmailMessage(String msg) {
         this.msg = msg;
     }

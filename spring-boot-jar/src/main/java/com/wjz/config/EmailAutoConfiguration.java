@@ -27,26 +27,33 @@ public class EmailAutoConfiguration {
     public static class EmailSender {
         private final EmailProperties emailProperties;
         private final EmailSenderEnv env;
+
         public EmailSender(EmailProperties emailProperties) {
             this.emailProperties = emailProperties;
             this.env = null;
         }
+
         public EmailSender(EmailSenderEnv env) {
             this.env = env;
             this.emailProperties = null;
         }
+
         public String power() {
             return emailProperties.getPower();
         }
+
         public String type() {
             return emailProperties.getType().name();
         }
+
         public String qqName() {
             return emailProperties.getQq().getLastName();
         }
+
         public List<String> dreams() {
             return emailProperties.getDreams();
         }
+
         public Date time() {
             return emailProperties.getTime();
         }

@@ -29,7 +29,7 @@ public class EnvironmentPostProcessorExample implements EnvironmentPostProcessor
 
     private PropertySource<Map<String, Object>> loadProperties(Resource path) {
         if (!path.exists()) {
-            throw new IllegalArgumentException("Resource "+ path + "does not exist");
+            throw new IllegalArgumentException("Resource " + path + "does not exist");
         }
         try {
             return new DecryptedMapPropertySource((OriginTrackedMapPropertySource) loader.load("custom-resource", path).get(0));
