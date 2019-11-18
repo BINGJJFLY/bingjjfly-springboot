@@ -15,6 +15,7 @@ public class ArgsController {
     private ApplicationArguments args;
     @Value("profile")
     private String profile;
+
     @RequestMapping("/application")
     public void application() {
         List<String> nonOptionArgs = args.getNonOptionArgs();

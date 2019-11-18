@@ -15,7 +15,7 @@ public class MessageConverterController {
         Dog dog = new Dog();
         dog.setName("bingjjfly");
         dog.setBirth(new Date());
-       return dog;
+        return dog;
     }
 
 }

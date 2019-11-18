@@ -11,7 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  * SpringBoot单元测试
- *      驱动器使用SpringRunner，而不是Junit
+ * 驱动器使用SpringRunner，而不是Junit
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest

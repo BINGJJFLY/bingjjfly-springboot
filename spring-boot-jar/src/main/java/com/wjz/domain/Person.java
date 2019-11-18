@@ -10,8 +10,8 @@ import java.util.Map;
 
 /**
  * 将配置中的属性映射至该组件，该类须为Spring中的组件
- * @ConfigurationProperties告诉SpringBoot将类中的属性和配置文件中的属性进行绑定，默认映射全局配置文件
- *      prefix/value：指定配置文件中的哪个属性
+ *
+ * @ConfigurationProperties告诉SpringBoot将类中的属性和配置文件中的属性进行绑定，默认映射全局配置文件 prefix/value：指定配置文件中的哪个属性
  */
 @Component
 @ConfigurationProperties("person")

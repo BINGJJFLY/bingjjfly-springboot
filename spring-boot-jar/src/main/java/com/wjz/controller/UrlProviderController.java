@@ -9,6 +9,7 @@ import org.springframework.web.servlet.resource.ResourceUrlProvider;
 public class UrlProviderController {
     @Autowired
     private ResourceUrlProvider provider;
+
     @ModelAttribute("urls")
     public ResourceUrlProvider urls() {
         return provider;
