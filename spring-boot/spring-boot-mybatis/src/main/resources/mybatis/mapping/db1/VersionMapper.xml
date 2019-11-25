@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wjz.springboot.mapper.db1.VersionMapper">
+	<resultMap id="VersionResultMap" type="com.wjz.springboot.domain.Version">
+		<id column="ID" property="id" jdbcType="INTEGER" />
+		<result column="VERSION" property="version" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<select id="selectById" parameterType="int" resultMap="VersionResultMap">
+		SELECT ID, VERSION FROM VERSION WHERE ID = #{id }
+	</select>
+
+	<insert id="insert" parameterType="Version">
+		INSERT INTO VERSION (VERSION) VALUES (#{version})
+	</insert>
+</mapper>
