@@ -1,0 +1,7 @@
+@Import几种引入方式：
+    普通类对象方式
+    配置类对象方式
+    全类名数组方式
+    Bean定义方式
+
+参考：https://www.jianshu.com/p/afd2c49394c2
