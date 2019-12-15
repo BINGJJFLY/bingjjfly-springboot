@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface UserService {
 
-    List<User> index();
+    List<User> select(Integer id);
 
     List<User> update();
 

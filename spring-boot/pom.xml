@@ -21,5 +21,6 @@
         <module>spring-boot-cache</module>
         <module>spring-boot-dubbo</module>
         <module>spring-boot-testing</module>
+        <module>spring-boot-starter</module>
     </modules>
 </project>

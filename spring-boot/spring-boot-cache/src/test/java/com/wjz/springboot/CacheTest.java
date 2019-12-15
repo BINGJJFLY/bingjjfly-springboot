@@ -16,6 +16,6 @@ public class CacheTest {
 
     @Test
     public void index() {
-        System.out.println(userService.index());
+        System.out.println(userService.select(1));
     }
 }
