@@ -1,4 +1,4 @@
-package com.wjz.springboot.dubbo;
+package com.wjz.dubbo.api;
 
 public interface UserService {
 
